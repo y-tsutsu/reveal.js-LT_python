@@ -78,11 +78,116 @@
 				    data-vertical="\n--\n">
 				    <script type="text/template">
 
-## Pythonの布教
+## Pythonのおすすめ
 　
 ### by tsutsu
 
 ---
+
+### もっとみんなに使ってもらいたい
+
+---
+
+### お題
+
+Google Code Jam 2009
+
+Qualification Round Problem A
+
+[https://code.google.com/codejam/contest/90101/dashboard](https://code.google.com/codejam/contest/90101/dashboard)
+
+--
+
+### 要約
+
+宇宙からのメッセージがあったが，単語の中で読み取れない文字もある．存在する単語の中から一致する候補を数える．
+
+```
+Input                  Output
+
+3 5 4                  Case #1: 2
+abc                    Case #2: 1
+bca                    Case #3: 3
+dac                    Case #4: 0
+dbc
+cba
+(ab)(bc)(ca)
+abc
+(abc)(abc)(abc)
+(zyx)bc
+```
+
+※正規表現を使えば簡単
+
+---
+
+### 1行目の読み込み
+
+```
+3 5 4
+```
+
+1行読み込んで
+
+空白文字で分割して
+
+整数型に変換して
+
+それぞれ名前を付けたい
+
+--
+
+### 1行でシンプルに書ける
+
+```
+L, D, N = [int(x) for x in f.readline()[:-1].split()]
+```
+
+* リスト内包表記
+* リストのスライス
+* リストのマイナス値インデックス
+* アンパック代入
+
+---
+
+### かなりのお手軽感！
+
+---
+
+### 全体も数行で終わり
+
+```
+import re
+
+with open('A-large-practice.in') as f:
+    L, D, N = [int(x) for x in f.readline()[:-1].split()]
+    words = [f.readline()[:-1] for _ in range(D)]
+    for i in range(N):
+        pattern = f.readline()[:-1].replace('(', '[').replace(')', ']')
+        K = len([w for w in words if re.match(pattern, w)])
+        print('Case #{0}: {1}'.format(i + 1, K))
+```
+
+---
+
+## おまけ
+
+--
+
+### 最後のfor文もリスト内包表記で
+
+```
+import re
+
+with open('A-large-practice.in') as f:
+    L, D, N = [int(x) for x in f.readline()[:-1].split()]
+    words = [f.readline()[:-1] for _ in range(D)]
+    [print('Case #{0}: {1}'.format(x[0], len([w for w in words if re.match(x[1], w)]))) for x in [(i + 1, f.readline()[:-1].replace('(', '[').replace(')', ']')) for i in range(N)]]
+```
+
+---
+
+### ぜひpython使ってみてください
 
 ---
 
